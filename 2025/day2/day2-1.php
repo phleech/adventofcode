@@ -14,38 +14,30 @@ $input = [
     '2121212118-2121212124',
 ];
 
-$input = explode(",", file_get_contents("input.txt"));
+//$input = explode(",", file_get_contents("input.txt"));
 
 $invalidIds = [];
 
 foreach ($input as $rangeString) {
     list($rangeStart, $rangeEnd) = sscanf($rangeString, '%d-%d');
-//    echo "start: $rangeStart, end: $rangeEnd\n";
+    echo "start: $rangeStart, end: $rangeEnd\n";
 
     for ($id = $rangeStart; $id <= $rangeEnd; $id++) {
-//        echo "$id\n";
-
         $len = strlen((string) $id);
+        if ($len < 2) { continue; }
 
-        if ($len % 2 != 0) {
-            continue;
-        }
+        if ($len % 2 != 0) { continue; }
+        $chunkLength = $len / 2;
+        $parts = str_split((string) $id, $chunkLength);
 
-        $len /= 2;
-
-        $left = (int) ($id / pow(10, $len));
-        $right = $id - ($left * pow(10, $len));
-
-//        echo "left: $left, right: $right\n";
-
-        if ($left == $right) {
-//            echo "found invalid: $id\n";
+        if (count(array_count_values($parts)) === 1) {
+            //all values match;
+            echo "found invalid: $id\n";
             $invalidIds[] = $id;
         }
     }
-
 }
 
-//var_dump($invalidIds);
+var_dump($invalidIds);
 
 echo "sum of invalid id's: " . array_sum($invalidIds) . "\n";
