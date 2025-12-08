@@ -22,13 +22,23 @@ $input = [
 $input = explode("\n", file_get_contents("input.txt"));
 
 $grid = array_map(fn($row): array => str_split($row, 1), $input);
-$splitCount = 0;
+$count = [];
+
+for ($r = 0; $r < count($grid); $r++) {
+    for ($c = 0; $c < count($grid[$r]); $c++) {
+        $count[$c] = 0;
+    }
+}
 
 for ($r = 0; $r < count($grid); $r++) {
     $row = $grid[$r];
 
     for ($c = 0; $c < count($row); $c++) {
         $col = $row[$c];
+
+        if ($col == 'S') {
+            $count[$c]++;
+        }
 
         if ($col == '^') {
             $inLineOfBeam = false;
@@ -63,13 +73,12 @@ for ($r = 0; $r < count($grid); $r++) {
             }
 
             if ($inLineOfBeam) {
-                //echo "split\n";
-                $splitCount++;
+                $count[$c - 1] += $count[$c];
+                $count[$c + 1] += $count[$c];
+                $count[$c] = 0;
             }
-
-            //echo "\n";
         }
     }
 }
 
-echo "total split: $splitCount\n";
+echo "ts: " . array_sum($count) . "\n";
