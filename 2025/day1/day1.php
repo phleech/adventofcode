@@ -17,26 +17,18 @@ $rotations = [
     'L82',
 ];
 
-$rotations = explode("\n", file_get_contents("input.txt"));
+$rotations = explode("\n", trim(file_get_contents("input.txt")));
 
 foreach ($rotations as $rotation) {
-//    echo "current position = $position\n";
-
     list($direction, $step) = sscanf($rotation, '%1s%d');
 
-    if ($direction == 'L') {
-        $step *= -1;
-    }
-
-//    echo "this rotation = $rotation ($step)\n";
-
     //first handle >100 step increments
-    $zeroCrossed += (int) (abs($step) / 100);
+    $zeroCrossed += (int) ($step / 100);
     $step %= 100;
 
     //then handle the balance
     $startPosition = $position;
-    $position += $step;
+    $position += ($direction == 'L' ? -$step : $step);
 
     if ($position < 0) {
         $position += 100;
@@ -51,16 +43,13 @@ foreach ($rotations as $rotation) {
         continue;
     }
 
-    if ($startPosition != 0 && $step > 0 && $startPosition > $position) {
+    if (
+        ($startPosition != 0 && $direction == 'R' && $startPosition > $position) ||
+        ($startPosition != 0 && $direction == 'L' && $startPosition < $position)
+    ) {
         $zeroCrossed++;
-        continue;
-    }
-
-    if ($startPosition != 0 && $step < 0 && $startPosition < $position) {
-        $zeroCrossed++;
-        continue;
     }
 }
 
-echo "zero landed = $zeroLanded, zero crossed = $zeroCrossed\n\n";
+echo "zero landed: $zeroLanded, zero crossed: $zeroCrossed, total: " . $zeroLanded + $zeroCrossed. "\n";
 
