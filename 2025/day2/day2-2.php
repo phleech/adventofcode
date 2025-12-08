@@ -20,7 +20,6 @@ $invalidIds = [];
 
 foreach ($input as $rangeString) {
     list($rangeStart, $rangeEnd) = sscanf($rangeString, '%d-%d');
-    echo "start: $rangeStart, end: $rangeEnd\n";
 
     for ($id = $rangeStart; $id <= $rangeEnd; $id++) {
         $len = strlen((string) $id);
@@ -37,12 +36,10 @@ foreach ($input as $rangeString) {
 
             if (count(array_count_values($parts)) === 1) {
                 //all values match;
-                echo "found invalid: $id\n";
                 $invalidIds[] = $id;
             }
         }
     }
-
 }
 
 $invalidIds = array_unique($invalidIds);
@@ -51,7 +48,5 @@ $invalidIds = array_unique($invalidIds);
 //  22 22 22
 //  222 222
 //are all invalid in different ways, but are the same id
-
-var_dump($invalidIds);
 
 echo "sum of invalid id's: " . array_sum($invalidIds) . "\n";
