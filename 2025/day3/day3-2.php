@@ -125,6 +125,5 @@ foreach ($input as $bank) {
         $n12['num'];
 }
 
-var_dump($joltage);
-
 echo "sum of joltage: " . array_sum($joltage) . "\n";
+

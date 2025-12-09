@@ -33,6 +33,5 @@ foreach ($input as $bank) {
     $joltage[] = ($n1['num'] * 10) + $n2['num'];
 }
 
-//var_dump($joltage);
-
 echo "sum of joltage: " . array_sum($joltage) . "\n";
+
