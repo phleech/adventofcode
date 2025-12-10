@@ -48,8 +48,6 @@ for ($r = 0; $r < count($grid); $r++) {
                 $above = $grid[$rc][$c];
                 $right = $grid[$rc][$c + 1];
 
-                //echo "left: $left, above: $above, right: $right\n";
-
                 if ($above == '.') {
                     //continue;
                 }
@@ -60,13 +58,11 @@ for ($r = 0; $r < count($grid); $r++) {
                 }
 
                 if ($above == 'S') {
-                    //echo "hit\n";
                     $inLineOfBeam = true;
                     break;
                 }
 
                 if ($left == '^' || $right == '^') {
-                    //echo "hit\n";
                     $inLineOfBeam = true;
                     break;
                 }
