@@ -14,7 +14,7 @@ The database operates on ingredient IDs. It consists of a list of fresh ingredie
 `10-14`  
 `16-20`  
 `12-18`  
-``  
+` `  
 `1`  
 `5`  
 `8`  
