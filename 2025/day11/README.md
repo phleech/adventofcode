@@ -80,3 +80,7 @@ However, only `2` paths from `svr` to `out` visit both `dac` and `fft`.
 
 Find all of the paths that lead from `svr` to `out`. How many of those paths visit both `dac` and `fft`?
 
+> Your puzzle answer was `473930047491888`.
+
+Both parts of this puzzle are complete! They provide two gold stars: **
+

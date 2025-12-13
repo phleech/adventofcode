@@ -24,11 +24,7 @@ foreach ($input as $route) {
 }
 
 $count = 0;
-foreach ($routes as $name => $devices) {
-    if ($name == 'you') {
-        findRoute($routes, $devices, $count);
-    }
-}
+findRoute($routes, $routes['you'], $count);
 
 echo "found $count routes\n";
 
